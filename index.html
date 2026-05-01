@@ -3,19 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>For Pratyusha ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
 body{
-  margin:0;
   font-family:'Poppins',sans-serif;
-  background:black;
   color:white;
   overflow:hidden;
-  text-align:center;
+}
+
+/* animated background */
+body::before{
+  content:"";
+  position:fixed;
+  width:200%;
+  height:200%;
+  background:radial-gradient(circle,#ff4b5c22,#000);
+  animation:bgMove 12s linear infinite;
+}
+@keyframes bgMove{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(-20%,-20%)}
+  100%{transform:translate(0,0)}
 }
 
 /* pages */
@@ -24,65 +37,54 @@ body{
   width:100%;
   height:100%;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
+  flex-direction:column;
   padding:30px;
   opacity:0;
   transition:1s;
 }
 .active{opacity:1}
 
+/* glass card */
+.card{
+  backdrop-filter:blur(15px);
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:20px;
+  max-width:600px;
+}
+
 /* text */
 .glow{
   color:#ff4b5c;
-  text-shadow:0 0 25px #ff4b5c,0 0 50px #ff4b5c;
+  text-shadow:0 0 20px #ff4b5c;
 }
 
 p{
-  max-width:650px;
   line-height:1.9;
-  font-size:18px;
+  margin-top:15px;
+  font-size:17px;
 }
 
 /* image */
-.imgWrap{
-  position:relative;
-  margin:20px 0;
-}
-.imgWrap img{
+.img{
   width:260px;
   border-radius:20px;
+  margin:20px 0;
   box-shadow:0 0 25px #ff4b5c;
-}
-.blur{
-  position:absolute;
-  width:100%;
-  height:100%;
-  background-size:cover;
-  filter:blur(30px) brightness(0.5);
-  transform:scale(1.3);
-  z-index:-1;
+  transition:0.5s;
 }
 
-/* button */
-button{
+/* hint */
+.hint{
+  opacity:0.5;
+  font-size:13px;
   margin-top:20px;
-  padding:12px 25px;
-  border:none;
-  border-radius:25px;
-  background:#ff4b5c;
-  color:white;
 }
 
 /* cake */
-#cake{
-  font-size:70px;
-  cursor:pointer;
-}
-
-/* no button */
-#noBtn{transition:0.3s}
+#cake{font-size:70px;cursor:pointer}
 
 /* canvas */
 canvas{
@@ -98,87 +100,101 @@ canvas{
 
 <canvas id="fx"></canvas>
 
-<audio id="music" autoplay loop>
+<audio id="music">
 <source src="music/song.mp3">
 </audio>
 
 <!-- PAGE 1 -->
 <div class="page active" id="p1">
+<div class="card">
 <h1 class="glow">Happy Birthday ❤️</h1>
-<p>
-From the day we met on 17th December 2023, everything slowly started changing.  
-At first, it was just normal conversations… but you became something much more.  
-You became my comfort, my peace, and the person I look forward to every day.
-</p>
+<p id="text1"></p>
+</div>
+<div class="hint">tap anywhere to continue</div>
 </div>
 
 <!-- PAGE 2 -->
 <div class="page" id="p2">
-<div class="imgWrap">
-<div class="blur" style="background-image:url('https://i.ibb.co/0yJPG7yd/tmpl7q15m-x.jpg')"></div>
-<img src="https://i.ibb.co/0yJPG7yd/tmpl7q15m-x.jpg">
+<div class="card">
+<img class="img" src="https://i.ibb.co/0yJPG7yd/tmpl7q15m-x.jpg">
+<p id="text2"></p>
 </div>
-<p>
-There’s something about you that just feels special.  
-Even the little things you love… like Kinder Joy 🍫… feel important because they’re a part of you.  
-And I love every little detail about you.
-</p>
 </div>
 
 <!-- PAGE 3 -->
 <div class="page" id="p3">
-<div class="imgWrap">
-<div class="blur" style="background-image:url('https://i.ibb.co/d0B7tvD6/tmp0h2pixqc.jpg')"></div>
-<img src="https://i.ibb.co/d0B7tvD6/tmp0h2pixqc.jpg">
+<div class="card">
+<img class="img" src="https://i.ibb.co/d0B7tvD6/tmp0h2pixqc.jpg">
+<p id="text3"></p>
 </div>
-<p>
-The way you admire Virat Kohli… that passion, that love…  
-I see that same spark in you too. And it makes me admire you even more.
-</p>
 </div>
 
 <!-- PAGE 4 -->
 <div class="page" id="p4">
-<div class="imgWrap">
-<div class="blur" style="background-image:url('https://i.ibb.co/Ts0gd70/tmp91cz6bh8.jpg')"></div>
-<img src="https://i.ibb.co/Ts0gd70/tmp91cz6bh8.jpg">
+<div class="card">
+<img class="img" src="https://i.ibb.co/Ts0gd70/tmp91cz6bh8.jpg">
+<p id="text4"></p>
 </div>
-<p>
-What we have feels simple… but real.  
-And honestly, that’s what makes it beautiful.
-</p>
 </div>
 
 <!-- PAGE 5 -->
 <div class="page" id="p5">
-<div class="imgWrap">
-<div class="blur" style="background-image:url('https://i.ibb.co/ksXt8sGc/tmpxk8qu98s.jpg')"></div>
-<img src="https://i.ibb.co/ksXt8sGc/tmpxk8qu98s.jpg">
-</div>
+<div class="card">
+<img class="img" src="https://i.ibb.co/ksXt8sGc/tmpxk8qu98s.jpg">
 
-<p>
-I don’t just want to be part of your life for now…  
-I want to stay.  
-Because you became someone I never want to lose. ❤️
-</p>
+<p id="text5"></p>
 
-<h2>Will you stay with me forever? ❤️</h2>
+<h2 style="margin-top:20px;">Will you stay with me forever? ❤️</h2>
 
 <button onclick="yes()">Yes ❤️</button>
-<button id="noBtn" onclick="moveNo()">No 😏</button>
+<button onclick="moveNo()" id="noBtn">No 😏</button>
 
 <div id="cake">🎂</div>
 <p id="res"></p>
 
-<p style="opacity:0.6;">Created by Your Idiot</p>
+<p class="hint">Created by Your Idiot</p>
+</div>
 </div>
 
 <script>
 
-// navigation
+// TYPEWRITER TEXT
+function type(id,text,speed=30){
+  let i=0;
+  function t(){
+    if(i<text.length){
+      document.getElementById(id).innerHTML+=text[i++];
+      setTimeout(t,speed);
+    }
+  }
+  t();
+}
+
+// TEXT CONTENT
+type("text1",
+"From the day we met on 17th December 2023, something quietly started changing inside me. At first it was just normal conversations… but slowly, you became the one person I look forward to every single day."
+);
+
+type("text2",
+"There’s something about you that just feels different. The way you smile, the way you talk… even the little things you love like Kinder Joy 🍫 make me smile too."
+);
+
+type("text3",
+"The way you admire Virat Kohli… that passion, that love… I see that same spark in you. And that’s something I truly admire."
+);
+
+type("text4",
+"What we have feels simple… but real. And honestly, that’s what makes it special. Because even silence with you feels comfortable."
+);
+
+type("text5",
+"I don’t just want to be part of your life for now… I want to stay. Because you became someone I never want to lose. ❤️"
+);
+
+// NAVIGATION
 let current=1;
 
-function nextPage(){
+function next(){
   if(current<5){
     document.getElementById("p"+current).classList.remove("active");
     current++;
@@ -186,69 +202,65 @@ function nextPage(){
   }
 }
 
-// auto slower
-setInterval(nextPage,15000);
+// tap + swipe
+document.body.onclick=()=>{
+  music.play();
+  next();
+};
 
-// tap to skip
-document.body.addEventListener("click", nextPage);
-
-// swipe support
 let startY=0;
 document.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
 document.addEventListener("touchend",e=>{
-  let endY=e.changedTouches[0].clientY;
-  if(startY-endY>50) nextPage();
+  if(startY-e.changedTouches[0].clientY>50) next();
 });
 
-// no button
+// NO BUTTON
 function moveNo(){
-  let btn=document.getElementById("noBtn");
-  btn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+  noBtn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
 }
 
-// yes
+// YES + EFFECT
 function yes(){
-  document.getElementById("res").innerHTML="You just made me the happiest ❤️";
+  res.innerHTML="You just made me the happiest ❤️";
   firework();
 }
 
-// cake
-document.getElementById("cake").onclick=()=>{
-  document.getElementById("cake").innerHTML="🍰";
+// CAKE
+cake.onclick=()=>{
+  cake.innerHTML="🍰";
   firework();
 }
 
-// fireworks
+// FIREWORK
 let c=document.getElementById("fx");
 let ctx=c.getContext("2d");
 c.width=innerWidth;
 c.height=innerHeight;
 
-let particles=[];
+let p=[];
 
 function firework(){
-  for(let i=0;i<150;i++){
-    particles.push({
+  for(let i=0;i<120;i++){
+    p.push({
       x:c.width/2,
       y:c.height/2,
-      dx:(Math.random()-0.5)*10,
-      dy:(Math.random()-0.5)*10
+      dx:(Math.random()-0.5)*8,
+      dy:(Math.random()-0.5)*8
     });
   }
-  animate();
+  anim();
 }
 
-function animate(){
+function anim(){
   ctx.clearRect(0,0,c.width,c.height);
-  particles.forEach(p=>{
-    p.x+=p.dx;
-    p.y+=p.dy;
-    p.dy+=0.2;
-    ctx.fillText("❤️",p.x,p.y);
+  p.forEach(e=>{
+    e.x+=e.dx;
+    e.y+=e.dy;
+    e.dy+=0.2;
+    ctx.fillText("❤️",e.x,e.y);
   });
-  requestAnimationFrame(animate);
+  requestAnimationFrame(anim);
 }
-
 </script>
 
 </body>
