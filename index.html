@@ -6,18 +6,51 @@
 <title>For Pratyusha ❤️</title>
 
 <style>
-body { margin:0; font-family:'Segoe UI'; background:black; color:white; text-align:center; overflow:hidden; }
+html { scroll-behavior: smooth; }
 
-canvas { position:fixed; top:0; left:0; z-index:-1; }
+body {
+  margin:0;
+  font-family:'Segoe UI';
+  background:black;
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+  overflow-y:auto;
+}
 
-.glow { color:#ff4b5c; text-shadow:0 0 20px #ff4b5c,0 0 40px #ff4b5c; }
+/* particles */
+canvas {
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
 
-@keyframes beat {0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+/* glow */
+.glow {
+  color:#ff4b5c;
+  text-shadow:0 0 20px #ff4b5c,0 0 40px #ff4b5c;
+}
+
+/* heartbeat */
+@keyframes beat {
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.08);}
+}
 .heartbeat { animation:beat 1.2s infinite; }
 
-.screen { height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; padding:20px; }
+/* screens */
+.screen {
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  padding:20px;
+}
 .hidden { display:none; }
 
+/* button */
 button {
   background:linear-gradient(45deg,#ff4b5c,#ff7a7a);
   border:none;
@@ -27,6 +60,7 @@ button {
   margin:10px;
 }
 
+/* reel */
 .reel {
   position:relative;
   width:260px;
@@ -36,24 +70,44 @@ button {
   box-shadow:0 0 20px #ff4b5c;
 }
 
-.reel img { width:100%; height:100%; object-fit:cover; transition:0.8s; }
+.reel img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:opacity 0.8s ease;
+}
 
 .blur-bg {
-  position:absolute; width:100%; height:100%;
-  filter:blur(25px) brightness(0.6); transform:scale(1.3);
+  position:absolute;
+  width:100%;
+  height:100%;
+  background-size:cover;
+  filter:blur(25px) brightness(0.6);
+  transform:scale(1.3);
 }
 
 .overlayText {
-  position:absolute; bottom:20px; left:10px; right:10px;
+  position:absolute;
+  bottom:20px;
+  left:10px;
+  right:10px;
   text-shadow:0 0 10px black;
+  transition:opacity 0.8s ease;
 }
 
-#finalLine { text-shadow:0 0 15px #ff4b5c; }
+#finalLine {
+  text-shadow:0 0 15px #ff4b5c;
+}
 
 #noBtn { transition:0.3s; }
 
+/* confetti */
 #confettiCanvas {
-  position:fixed; top:0; left:0; width:100%; height:100%;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   pointer-events:none;
 }
 </style>
@@ -64,11 +118,13 @@ button {
 <canvas id="bg"></canvas>
 <canvas id="confettiCanvas"></canvas>
 
+<!-- INTRO -->
 <div id="intro" class="screen">
   <h1 class="glow heartbeat">For Pratyusha ❤️</h1>
   <button onclick="start()">Start 💖</button>
 </div>
 
+<!-- MAIN -->
 <div id="main" class="screen hidden">
   <h1 class="glow">Happy Birthday ❤️</h1>
   <p id="typeText"></p>
@@ -85,6 +141,7 @@ button {
   <button onclick="finalSurprise()">Final Surprise 🎁</button>
 </div>
 
+<!-- FINAL -->
 <div id="endPage" class="screen hidden">
   <h1 id="finalName" class="glow heartbeat"></h1>
   <p id="finalText"></p>
@@ -101,6 +158,11 @@ button {
 </audio>
 
 <script>
+// smooth scroll helper
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
 // START
 function start(){
   intro.style.display="none";
@@ -108,10 +170,12 @@ function start(){
   music.play();
   typeWriter();
   updateDays();
+
+  setTimeout(()=>scrollToSection("main"),300);
   setTimeout(startSlideshow,2200);
 }
 
-// TEXT
+// TYPE TEXT
 let text="From the day we met... everything changed ❤️";
 let i=0;
 function typeWriter(){
@@ -132,9 +196,9 @@ function updateDays(){
 // PHOTOS (.jpeg)
 let photos=["images/p1.jpeg","images/p2.jpeg","images/p3.jpeg","images/p4.jpeg"];
 let captions=[
-"You ❤️",
+"The way you smile… ❤️",
 "My favorite ✨",
-"Always you 💖",
+"Everything feels right 💖",
 "Stay forever? ❤️"
 ];
 let timings=[2.4,7.8,13.2,19.6];
@@ -142,6 +206,8 @@ let index=0;
 
 function startSlideshow(){
   photoSection.style.display="block";
+  scrollToSection("photoSection");
+
   music.ontimeupdate=()=>{
     if(index<timings.length && music.currentTime>=timings[index]){
       showSlide(index);
@@ -152,11 +218,15 @@ function startSlideshow(){
 
 function showSlide(i){
   mainPhoto.style.opacity=0;
+  overlayText.style.opacity=0;
+
   setTimeout(()=>{
     mainPhoto.src=photos[i];
     blurBg.style.backgroundImage=`url(${photos[i]})`;
     overlayText.innerHTML=captions[i];
+
     mainPhoto.style.opacity=1;
+    overlayText.style.opacity=1;
   },700);
 }
 
@@ -164,10 +234,13 @@ function showSlide(i){
 function finalSurprise(){
   main.style.display="none";
   endPage.style.display="flex";
+  scrollToSection("endPage");
+
   fadeMusic();
   animateEnding();
 }
 
+// MUSIC FADE
 function fadeMusic(){
   let v=music.volume;
   let f=setInterval(()=>{
@@ -176,6 +249,7 @@ function fadeMusic(){
   },200);
 }
 
+// END TEXT
 function animateEnding(){
   let name="Pratyusha ❤️";
   let msg="You became my everything.";
@@ -200,7 +274,7 @@ function animateEnding(){
   n();
 }
 
-// YES/NO
+// YES / NO
 function yesClicked(){
   responseText.innerHTML="I knew it ❤️";
   yesBtn.style.display="none";
@@ -221,8 +295,8 @@ let confetti=[];
 function startConfetti(){
   for(let i=0;i<120;i++){
     confetti.push({
-      x:window.innerWidth/2,
-      y:window.innerHeight/2,
+      x:innerWidth/2,
+      y:innerHeight/2,
       dx:(Math.random()-0.5)*8,
       dy:(Math.random()-0.5)*8,
       g:0.2
@@ -242,7 +316,7 @@ function animateConfetti(){
   requestAnimationFrame(animateConfetti);
 }
 
-// PARTICLES BG
+// BG PARTICLES
 let c=document.getElementById("bg"),cx=c.getContext("2d");
 c.width=innerWidth;c.height=innerHeight;
 let p=[];
@@ -250,7 +324,11 @@ for(let i=0;i<60;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height});
 function draw(){
   cx.clearRect(0,0,c.width,c.height);
   cx.fillStyle="pink";
-  p.forEach(e=>{cx.fillRect(e.x,e.y,2,2); e.y-=0.3; if(e.y<0)e.y=c.height;});
+  p.forEach(e=>{
+    cx.fillRect(e.x,e.y,2,2);
+    e.y-=0.3;
+    if(e.y<0)e.y=c.height;
+  });
   requestAnimationFrame(draw);
 }
 draw();
