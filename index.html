@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>For Pratyusha ❤️</title>
 
-<!-- Better font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box}
 body{
   margin:0;
   font-family:'Poppins',sans-serif;
@@ -30,26 +29,23 @@ body{
   align-items:center;
   padding:30px;
   opacity:0;
-  transition:1.2s;
+  transition:1s;
 }
 .active{opacity:1}
 
-/* glow title */
+/* text */
 .glow{
   color:#ff4b5c;
   text-shadow:0 0 25px #ff4b5c,0 0 50px #ff4b5c;
 }
 
-/* paragraph style */
 p{
   max-width:650px;
   line-height:1.9;
-  font-size:17px;
-  margin-top:15px;
-  letter-spacing:0.3px;
+  font-size:18px;
 }
 
-/* image + blur */
+/* image */
 .imgWrap{
   position:relative;
   margin:20px 0;
@@ -69,7 +65,7 @@ p{
   z-index:-1;
 }
 
-/* buttons */
+/* button */
 button{
   margin-top:20px;
   padding:12px 25px;
@@ -77,20 +73,18 @@ button{
   border-radius:25px;
   background:#ff4b5c;
   color:white;
-  font-size:16px;
 }
-
-/* no button movement */
-#noBtn{transition:0.3s}
 
 /* cake */
 #cake{
   font-size:70px;
   cursor:pointer;
-  margin-top:20px;
 }
 
-/* canvas effects */
+/* no button */
+#noBtn{transition:0.3s}
+
+/* canvas */
 canvas{
   position:fixed;
   top:0;
@@ -104,7 +98,6 @@ canvas{
 
 <canvas id="fx"></canvas>
 
-<!-- MUSIC -->
 <audio id="music" autoplay loop>
 <source src="music/song.mp3">
 </audio>
@@ -113,13 +106,9 @@ canvas{
 <div class="page active" id="p1">
 <h1 class="glow">Happy Birthday ❤️</h1>
 <p>
-From the day we met on 17th December 2023, something quietly started changing inside me.  
-At first, it felt normal… just two people talking, sharing small moments.  
-But slowly, without me even realizing it, you became someone I started caring about more than anything.  
-You became my comfort, my peace, and the one person I think about without even trying.  
-
-It’s strange how someone can enter your life so simply… and become such an important part of it.  
-And that’s exactly what you did to me.
+From the day we met on 17th December 2023, everything slowly started changing.  
+At first, it was just normal conversations… but you became something much more.  
+You became my comfort, my peace, and the person I look forward to every day.
 </p>
 </div>
 
@@ -130,12 +119,9 @@ And that’s exactly what you did to me.
 <img src="https://i.ibb.co/0yJPG7yd/tmpl7q15m-x.jpg">
 </div>
 <p>
-There are so many little things about you that I notice… and slowly fall for every single time.  
-The way you smile, the way you talk, even the smallest things you like… like Kinder Joy 🍫.  
-
-It’s not just about those things… it’s about how *you* make everything feel special.  
-Being around you, even in the simplest moments, feels warm, calm, and real.  
-And honestly… I don’t think I’ve ever felt this kind of comfort with anyone else.
+There’s something about you that just feels special.  
+Even the little things you love… like Kinder Joy 🍫… feel important because they’re a part of you.  
+And I love every little detail about you.
 </p>
 </div>
 
@@ -146,13 +132,8 @@ And honestly… I don’t think I’ve ever felt this kind of comfort with anyon
 <img src="https://i.ibb.co/d0B7tvD6/tmp0h2pixqc.jpg">
 </div>
 <p>
-The way you admire Virat Kohli… that passion, that loyalty, that love you show…  
-I see that same spark in you too.  
-
-You’re not just someone who looks beautiful…  
-you’re someone who feels deeply, who cares deeply, who gives importance to the things and people you love.  
-
-And that’s something I truly admire about you.
+The way you admire Virat Kohli… that passion, that love…  
+I see that same spark in you too. And it makes me admire you even more.
 </p>
 </div>
 
@@ -163,17 +144,12 @@ And that’s something I truly admire about you.
 <img src="https://i.ibb.co/Ts0gd70/tmp91cz6bh8.jpg">
 </div>
 <p>
-What we have doesn’t feel loud or complicated…  
-it feels simple, calm, and real.  
-
-Like those quiet emotional moments that don’t need too many words to be understood.  
-Because sometimes, even silence with you feels comfortable.  
-
-And honestly… I wouldn’t trade this feeling for anything.
+What we have feels simple… but real.  
+And honestly, that’s what makes it beautiful.
 </p>
 </div>
 
-<!-- PAGE 5 FINAL -->
+<!-- PAGE 5 -->
 <div class="page" id="p5">
 <div class="imgWrap">
 <div class="blur" style="background-image:url('https://i.ibb.co/ksXt8sGc/tmpxk8qu98s.jpg')"></div>
@@ -181,14 +157,9 @@ And honestly… I wouldn’t trade this feeling for anything.
 </div>
 
 <p>
-I don’t just want to be a part of your life for now…  
+I don’t just want to be part of your life for now…  
 I want to stay.  
-
-Through your good days, your bad days, your random moods…  
-through everything.  
-
-Because somewhere along the way…  
-you became someone I never want to lose. ❤️
+Because you became someone I never want to lose. ❤️
 </p>
 
 <h2>Will you stay with me forever? ❤️</h2>
@@ -199,40 +170,55 @@ you became someone I never want to lose. ❤️
 <div id="cake">🎂</div>
 <p id="res"></p>
 
-<p style="opacity:0.6;margin-top:20px;">Created by Your Idiot</p>
+<p style="opacity:0.6;">Created by Your Idiot</p>
 </div>
 
 <script>
 
-/* auto swipe slower (READABLE) */
+// navigation
 let current=1;
-setInterval(()=>{
+
+function nextPage(){
   if(current<5){
     document.getElementById("p"+current).classList.remove("active");
     current++;
     document.getElementById("p"+current).classList.add("active");
   }
-},10000); // 10 seconds per page
+}
 
-/* no button escape */
+// auto slower
+setInterval(nextPage,15000);
+
+// tap to skip
+document.body.addEventListener("click", nextPage);
+
+// swipe support
+let startY=0;
+document.addEventListener("touchstart",e=>startY=e.touches[0].clientY);
+document.addEventListener("touchend",e=>{
+  let endY=e.changedTouches[0].clientY;
+  if(startY-endY>50) nextPage();
+});
+
+// no button
 function moveNo(){
   let btn=document.getElementById("noBtn");
   btn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
 }
 
-/* yes */
+// yes
 function yes(){
   document.getElementById("res").innerHTML="You just made me the happiest ❤️";
   firework();
 }
 
-/* cake click */
+// cake
 document.getElementById("cake").onclick=()=>{
   document.getElementById("cake").innerHTML="🍰";
   firework();
-};
+}
 
-/* fireworks + hearts */
+// fireworks
 let c=document.getElementById("fx");
 let ctx=c.getContext("2d");
 c.width=innerWidth;
@@ -241,7 +227,7 @@ c.height=innerHeight;
 let particles=[];
 
 function firework(){
-  for(let i=0;i<120;i++){
+  for(let i=0;i<150;i++){
     particles.push({
       x:c.width/2,
       y:c.height/2,
