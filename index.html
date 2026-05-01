@@ -5,68 +5,96 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Pratyusha ❤️</title>
 
+<!-- Better font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
-html { scroll-behavior:smooth; }
-body {
+*{box-sizing:border-box}
+body{
   margin:0;
-  font-family:'Segoe UI';
+  font-family:'Poppins',sans-serif;
   background:black;
   color:white;
-  text-align:center;
-  overflow-x:hidden;
-  overflow-y:auto;
-}
-
-canvas { position:fixed; top:0; left:0; z-index:-1; }
-
-.glow { color:#ff4b5c; text-shadow:0 0 20px #ff4b5c,0 0 40px #ff4b5c; }
-
-.screen {
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  flex-direction:column;
-  padding:20px;
-}
-
-button {
-  background:linear-gradient(45deg,#ff4b5c,#ff7a7a);
-  border:none;
-  padding:12px 25px;
-  color:white;
-  border-radius:30px;
-  margin:10px;
-}
-
-.reel {
-  width:260px;
-  height:420px;
-  border-radius:20px;
   overflow:hidden;
-  box-shadow:0 0 25px #ff4b5c;
-  position:relative;
+  text-align:center;
 }
 
-.reel img {
+/* pages */
+.page{
+  position:absolute;
   width:100%;
   height:100%;
-  object-fit:cover;
-  transition:0.8s;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:30px;
+  opacity:0;
+  transition:1.2s;
+}
+.active{opacity:1}
+
+/* glow title */
+.glow{
+  color:#ff4b5c;
+  text-shadow:0 0 25px #ff4b5c,0 0 50px #ff4b5c;
 }
 
-.overlayText {
+/* paragraph style */
+p{
+  max-width:650px;
+  line-height:1.9;
+  font-size:17px;
+  margin-top:15px;
+  letter-spacing:0.3px;
+}
+
+/* image + blur */
+.imgWrap{
+  position:relative;
+  margin:20px 0;
+}
+.imgWrap img{
+  width:260px;
+  border-radius:20px;
+  box-shadow:0 0 25px #ff4b5c;
+}
+.blur{
   position:absolute;
-  bottom:20px;
-  left:10px;
-  right:10px;
-  text-shadow:0 0 10px black;
+  width:100%;
+  height:100%;
+  background-size:cover;
+  filter:blur(30px) brightness(0.5);
+  transform:scale(1.3);
+  z-index:-1;
 }
 
-#confettiCanvas {
+/* buttons */
+button{
+  margin-top:20px;
+  padding:12px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff4b5c;
+  color:white;
+  font-size:16px;
+}
+
+/* no button movement */
+#noBtn{transition:0.3s}
+
+/* cake */
+#cake{
+  font-size:70px;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+/* canvas effects */
+canvas{
   position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
+  top:0;
+  left:0;
   pointer-events:none;
 }
 </style>
@@ -74,183 +102,166 @@ button {
 
 <body>
 
-<canvas id="bg"></canvas>
-<canvas id="confettiCanvas"></canvas>
+<canvas id="fx"></canvas>
 
-<!-- INTRO -->
-<div id="intro" class="screen">
-  <h1 class="glow">For Pratyusha ❤️</h1>
-  <button onclick="start()">Start 💖</button>
-</div>
-
-<!-- MAIN -->
-<div id="main" class="screen" style="display:none;">
-  <h1 class="glow">Happy Birthday ❤️</h1>
-
-  <p id="storyText" style="max-width:500px; line-height:1.6;"></p>
-
-  <p id="daysCount"></p>
-
-  <div id="photoSection" style="display:none;">
-    <div class="reel">
-      <img id="mainPhoto">
-      <div class="overlayText" id="overlayText"></div>
-    </div>
-  </div>
-
-  <button onclick="finalSurprise()">Final Surprise 🎁</button>
-</div>
-
-<!-- FINAL -->
-<div id="endPage" class="screen" style="display:none;">
-  <h1 class="glow">Pratyusha ❤️</h1>
-  <p id="finalText"></p>
-  <h2 id="finalLine"></h2>
-
-  <button id="yesBtn" onclick="yesClicked()">Yes ❤️</button>
-  <button id="noBtn" onclick="moveNo()">No 😏</button>
-
-  <p id="responseText"></p>
-</div>
-
-<audio id="music" loop>
+<!-- MUSIC -->
+<audio id="music" autoplay loop>
 <source src="music/song.mp3">
 </audio>
 
+<!-- PAGE 1 -->
+<div class="page active" id="p1">
+<h1 class="glow">Happy Birthday ❤️</h1>
+<p>
+From the day we met on 17th December 2023, something quietly started changing inside me.  
+At first, it felt normal… just two people talking, sharing small moments.  
+But slowly, without me even realizing it, you became someone I started caring about more than anything.  
+You became my comfort, my peace, and the one person I think about without even trying.  
+
+It’s strange how someone can enter your life so simply… and become such an important part of it.  
+And that’s exactly what you did to me.
+</p>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+<div class="imgWrap">
+<div class="blur" style="background-image:url('https://i.ibb.co/0yJPG7yd/tmpl7q15m-x.jpg')"></div>
+<img src="https://i.ibb.co/0yJPG7yd/tmpl7q15m-x.jpg">
+</div>
+<p>
+There are so many little things about you that I notice… and slowly fall for every single time.  
+The way you smile, the way you talk, even the smallest things you like… like Kinder Joy 🍫.  
+
+It’s not just about those things… it’s about how *you* make everything feel special.  
+Being around you, even in the simplest moments, feels warm, calm, and real.  
+And honestly… I don’t think I’ve ever felt this kind of comfort with anyone else.
+</p>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+<div class="imgWrap">
+<div class="blur" style="background-image:url('https://i.ibb.co/d0B7tvD6/tmp0h2pixqc.jpg')"></div>
+<img src="https://i.ibb.co/d0B7tvD6/tmp0h2pixqc.jpg">
+</div>
+<p>
+The way you admire Virat Kohli… that passion, that loyalty, that love you show…  
+I see that same spark in you too.  
+
+You’re not just someone who looks beautiful…  
+you’re someone who feels deeply, who cares deeply, who gives importance to the things and people you love.  
+
+And that’s something I truly admire about you.
+</p>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="p4">
+<div class="imgWrap">
+<div class="blur" style="background-image:url('https://i.ibb.co/Ts0gd70/tmp91cz6bh8.jpg')"></div>
+<img src="https://i.ibb.co/Ts0gd70/tmp91cz6bh8.jpg">
+</div>
+<p>
+What we have doesn’t feel loud or complicated…  
+it feels simple, calm, and real.  
+
+Like those quiet emotional moments that don’t need too many words to be understood.  
+Because sometimes, even silence with you feels comfortable.  
+
+And honestly… I wouldn’t trade this feeling for anything.
+</p>
+</div>
+
+<!-- PAGE 5 FINAL -->
+<div class="page" id="p5">
+<div class="imgWrap">
+<div class="blur" style="background-image:url('https://i.ibb.co/ksXt8sGc/tmpxk8qu98s.jpg')"></div>
+<img src="https://i.ibb.co/ksXt8sGc/tmpxk8qu98s.jpg">
+</div>
+
+<p>
+I don’t just want to be a part of your life for now…  
+I want to stay.  
+
+Through your good days, your bad days, your random moods…  
+through everything.  
+
+Because somewhere along the way…  
+you became someone I never want to lose. ❤️
+</p>
+
+<h2>Will you stay with me forever? ❤️</h2>
+
+<button onclick="yes()">Yes ❤️</button>
+<button id="noBtn" onclick="moveNo()">No 😏</button>
+
+<div id="cake">🎂</div>
+<p id="res"></p>
+
+<p style="opacity:0.6;margin-top:20px;">Created by Your Idiot</p>
+</div>
+
 <script>
 
-// STORY TEXT (EMOTIONAL)
-let story = `From the day we met on 17th December 2023, everything slowly started changing in a way I never expected. 
-At first, it was just normal… just two people meeting, talking… but then you became something much more than that.
-
-You became my comfort. My peace. The one person I think about without even trying.
-
-The way you smile, the way you talk, even the little things you love… like Kinder Joy 🍫, or how much you admire [Virat Kohli](chatgpt://generic-entity?number=2)… everything about you just feels special to me.
-
-Sometimes I feel like our story is like one of those emotional scenes from [Arafat](chatgpt://generic-entity?number=3)… simple from outside, but so deep from inside.
-
-I don’t know when exactly it happened… but somewhere between those normal conversations and small moments… you became my favorite part of every day.
-
-And honestly… I don’t just like you.  
-I care about you.  
-I worry about you.  
-And I want to stay with you… not just for now… but for a long time. ❤️`;
-
-let i=0;
-function typeStory(){
-  if(i<story.length){
-    document.getElementById("storyText").innerHTML += story[i++];
-    setTimeout(typeStory,25);
+/* auto swipe slower (READABLE) */
+let current=1;
+setInterval(()=>{
+  if(current<5){
+    document.getElementById("p"+current).classList.remove("active");
+    current++;
+    document.getElementById("p"+current).classList.add("active");
   }
-}
+},10000); // 10 seconds per page
 
-// START
-function start(){
-  intro.style.display="none";
-  main.style.display="flex";
-  music.play();
-  typeStory();
-  updateDays();
-  setTimeout(startSlideshow,3000);
-}
-
-// DAYS
-function updateDays(){
-  let d=new Date("2023-12-17");
-  let now=new Date();
-  let days=Math.floor((now-d)/(1000*60*60*24));
-  daysCount.innerHTML=days+" days ❤️";
-}
-
-// PHOTOS (YOUR LINKS)
-let photos=[
-"https://i.ibb.co/0yJPG7yd/tmpl7q15m-x.jpg",
-"https://i.ibb.co/d0B7tvD6/tmp0h2pixqc.jpg",
-"https://i.ibb.co/Ts0gd70/tmp91cz6bh8.jpg",
-"https://i.ibb.co/ksXt8sGc/tmpxk8qu98s.jpg"
-];
-
-let captions=[
-"The way you smile… ❤️",
-"My favorite person ✨",
-"Everything feels right with you 💖",
-"Will you stay forever? ❤️"
-];
-
-let index=0;
-
-function startSlideshow(){
-  photoSection.style.display="block";
-  showSlide();
-}
-
-function showSlide(){
-  mainPhoto.src=photos[index];
-  overlayText.innerHTML=captions[index];
-  index=(index+1)%photos.length;
-  setTimeout(showSlide,4000);
-}
-
-// FINAL
-function finalSurprise(){
-  main.style.display="none";
-  endPage.style.display="flex";
-  animateEnding();
-}
-
-function animateEnding(){
-  finalText.innerHTML="You came into my life unexpectedly… and became my everything.";
-  setTimeout(()=>{finalLine.innerHTML="Will you stay with me forever? ❤️";},1200);
-}
-
-// YES NO
-function yesClicked(){
-  responseText.innerHTML="I knew it ❤️ You just made me the happiest person alive.";
-  yesBtn.style.display="none";
-  noBtn.style.display="none";
-  startConfetti();
-}
-
+/* no button escape */
 function moveNo(){
-  noBtn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+  let btn=document.getElementById("noBtn");
+  btn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
 }
 
-// CONFETTI
-let ctx=document.getElementById("confettiCanvas").getContext("2d");
-let confetti=[];
-function startConfetti(){
+/* yes */
+function yes(){
+  document.getElementById("res").innerHTML="You just made me the happiest ❤️";
+  firework();
+}
+
+/* cake click */
+document.getElementById("cake").onclick=()=>{
+  document.getElementById("cake").innerHTML="🍰";
+  firework();
+};
+
+/* fireworks + hearts */
+let c=document.getElementById("fx");
+let ctx=c.getContext("2d");
+c.width=innerWidth;
+c.height=innerHeight;
+
+let particles=[];
+
+function firework(){
   for(let i=0;i<120;i++){
-    confetti.push({x:innerWidth/2,y:innerHeight/2,dx:(Math.random()-0.5)*8,dy:(Math.random()-0.5)*8});
+    particles.push({
+      x:c.width/2,
+      y:c.height/2,
+      dx:(Math.random()-0.5)*10,
+      dy:(Math.random()-0.5)*10
+    });
   }
-  animateConfetti();
+  animate();
 }
 
-function animateConfetti(){
-  ctx.clearRect(0,0,innerWidth,innerHeight);
-  confetti.forEach(p=>{
+function animate(){
+  ctx.clearRect(0,0,c.width,c.height);
+  particles.forEach(p=>{
     p.x+=p.dx;
     p.y+=p.dy;
     p.dy+=0.2;
     ctx.fillText("❤️",p.x,p.y);
   });
-  requestAnimationFrame(animateConfetti);
+  requestAnimationFrame(animate);
 }
-
-// BG PARTICLES
-let c=document.getElementById("bg"),cx=c.getContext("2d");
-c.width=innerWidth;c.height=innerHeight;
-let p=[];
-for(let i=0;i<60;i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height});
-function draw(){
-  cx.clearRect(0,0,c.width,c.height);
-  cx.fillStyle="pink";
-  p.forEach(e=>{
-    cx.fillRect(e.x,e.y,2,2);
-    e.y-=0.3;if(e.y<0)e.y=c.height;
-  });
-  requestAnimationFrame(draw);
-}
-draw();
 
 </script>
 
